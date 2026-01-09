@@ -6,7 +6,7 @@ class test_HtmlNode(unittest.TestCase):
     def test_props_to_html(self):
         node = HtmlNode("p","text para",[HtmlNode("h1","heading"),HtmlNode("a","link",[],{'href': 'https://www.google.com'})])
         self.assertEqual(node.props_to_html(),"")
-        print(node)
+        
 
     def test_props_to_html2(self):
         node = HtmlNode("p","text para",[],{
@@ -15,7 +15,7 @@ class test_HtmlNode(unittest.TestCase):
                                             }
                         )
         self.assertEqual(node.props_to_html(),' href="https://www.google.com" target="_blank"')
-        print(node)
+        
 
 
 class test_leafNode(unittest.TestCase):
