@@ -110,3 +110,4 @@ def text_to_textnodes(text):
     nodes = split_nodes_images_or_links(nodes,TextType.IMAGE)
     nodes = split_nodes_images_or_links(nodes,TextType.LINK)
     return nodes
+

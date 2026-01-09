@@ -1,6 +1,6 @@
 import unittest
 
-from src.helper import extract_markdown_images, extract_markdown_links, split_nodes_images_or_links
+from src.inline_helper import extract_markdown_images, extract_markdown_links, split_nodes_images_or_links
 from src.textnode import TextNode, TextType
 
 class test_extract_images(unittest.TestCase):
