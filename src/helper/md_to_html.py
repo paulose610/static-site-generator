@@ -1,6 +1,6 @@
-from src.block_helper import block_to_block_type, BlockType, markdown_to_blocks
-from src.htmlnode import LeafNode, ParentNode
-from src.inline_helper import text_to_textnodes, text_node_to_html_node
+from src.helper.block_helper import block_to_block_type, BlockType, markdown_to_blocks
+from src.helper.htmlnode import LeafNode, ParentNode
+from src.helper.inline_helper import text_to_textnodes, text_node_to_html_node
 #from src.textnode import TextNode, TextType
 
 

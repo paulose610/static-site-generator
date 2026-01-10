@@ -1,12 +1,11 @@
-import re
+import os
 
-from src.textnode import TextNode, TextType
-from src.htmlnode import LeafNode
+from re_mover import clean_folder, move_stuff
 
 def main():
-    to = TextNode('This is some anchor text', TextType.LINK, 'https://www.boot.dev')
-    print(to)
-
+    os.mkdir('public')
+    clean_folder('public')
+    move_stuff('static','public')
 
 if __name__ == '__main__':
     main()

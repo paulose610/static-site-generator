@@ -32,7 +32,7 @@ def block_to_block_type(block):
     block_line = block.split('\n')
     block_size = len(block_line)
     
-    if block_size==1 and re.search(r'^#{1,6} .*$',block_line[0]):
+    if re.search(r'^#{1,6} .*$',block_line[0]):
         return BlockType.HEADING
     if block_line[0] == '```' and block_line[-1]=='```':
         return BlockType.CODE
@@ -53,3 +53,5 @@ def block_to_block_type(block):
         return BlockType.UO_LIST
     
     return BlockType.PARA
+
+

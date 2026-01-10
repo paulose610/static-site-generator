@@ -18,10 +18,11 @@ conversion_dict = {
     'ul': ['<ul', '</ul>'],
     'ol': ['<ol', '</ol>'],
     'li': ['<li', '</li>'],
-    'a': ['<a', '</a>'],
-    'img': ['<img','</img>'],
+    'a': ['<a','</a>'],
+    'img': ['<img'],
     'article': ['<article','</article>'],
-    'section': ['<section','</section>']
+    'section': ['<section','</section>'],
+    'quote': ['<blockquote','</blockquote>']
 }
 
 class HtmlNode:
@@ -45,7 +46,7 @@ self.props = {self.props}
     def props_to_html(self):
         ret_str = ''
         for i in self.props:
-            ret_str += f' {i}="{self.props[i]}"'
+            ret_str += f" {i}='{self.props[i]}'"
         return ret_str
     
 class LeafNode(HtmlNode):
@@ -54,14 +55,17 @@ class LeafNode(HtmlNode):
         self.children = []
 
     def to_html(self):
-        if not self.val:
-            raise ValueError("No content to convert")
+        if not self.val and not self.props:
+            raise ValueError(f"No content to convert for tag {self.tag} with children?{self.children} val?{self.val} props?{self.props}")
         if not self.tag:
             return str(self.val)
-        else:
+        elif self.tag!='img':
             attrs = self.props_to_html()
             return f'{conversion_dict[self.tag][0]}{attrs}>{self.val}{conversion_dict[self.tag][1]}'
-
+        else:
+            attrs = self.props_to_html()
+            return f'{conversion_dict[self.tag][0]}{attrs}/>'
+    
     def __repr__(self):
         return f""" 
 tag = {self.tag},
@@ -81,6 +85,13 @@ class ParentNode(HtmlNode):
         else:
             cont = ''
             attrs = self.props_to_html()
-            for i in self.children:
-                cont+=i.to_html()
+            cont+=self.children[0].to_html()
+            for i in range(1,len(self.children)):
+                if not self.children[i-1].tag and not self.children[i].tag:
+                    cont+=' '
+                cont+=self.children[i].to_html()
+        
+        if self.tag is not None:
             return f'{conversion_dict[self.tag][0]}{attrs}>{cont}{conversion_dict[self.tag][1]}'
+        else:
+            return cont

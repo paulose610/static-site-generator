@@ -1,8 +1,8 @@
 import unittest
 
-from src.textnode import TextType, TextNode
+from src.helper.textnode import TextType, TextNode
 #from src.htmlnode import LeafNode
-from src.inline_helper import text_node_to_html_node, splits_nodes_delimiter, text_to_textnodes
+from src.helper.inline_helper import text_node_to_html_node, splits_nodes_delimiter, text_to_textnodes
 
 
 class TestTextNode(unittest.TestCase):
@@ -65,7 +65,7 @@ class TestTexttoHtml(unittest.TestCase):
             url="image.png",
         )
         html_node = text_node_to_html_node(node)
-        self.assertEqual(html_node.tag, "i")
+        self.assertEqual(html_node.tag, "img")
         self.assertEqual(html_node.val, None)
         self.assertEqual(
             html_node.props,

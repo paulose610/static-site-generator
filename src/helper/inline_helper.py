@@ -1,8 +1,8 @@
 import re
 import pprint
 
-from src.textnode import TextNode, TextType
-from src.htmlnode import LeafNode
+from src.helper.textnode import TextNode, TextType
+from src.helper.htmlnode import LeafNode
 
 
 def text_node_to_html_node(node):
@@ -18,7 +18,7 @@ def text_node_to_html_node(node):
         case TextType.LINK:
             return LeafNode('a',node.text,None,{'href':node.url})
         case TextType.IMAGE:
-            return LeafNode('i',None,None,{'src':node.url,'alt':node.text})
+            return LeafNode('img',None,None,{'src':node.url,'alt':node.text})
         case _:
             raise ValueError('No such TextType')
         

@@ -1,6 +1,6 @@
 import unittest
 
-from src.block_helper import markdown_to_blocks, block_to_block_type, BlockType
+from src.helper.block_helper import markdown_to_blocks, block_to_block_type, BlockType
 
 
 class test_md_to_blocks(unittest.TestCase):
@@ -52,10 +52,10 @@ Another paragraph after list
                 "- Item two\n- Item three",
                 "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev),\nAnother paragraph after list",
             ],
-        ) 
+        )
 
 
-class test_md_to_BlockType(unittest.TestCase):
+class test_block_to_BlockType(unittest.TestCase):
 
     def test_heading(self):
         block = "## Heading level 2"

@@ -1,7 +1,7 @@
 import unittest
 import pprint as p
 
-from src.md_to_html import markdown_to_html_node
+from src.helper.md_to_html import markdown_to_html_node
 
 class test_md_to_html(unittest.TestCase):
     def test_paragraphs(self):

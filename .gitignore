@@ -8,3 +8,9 @@ wheels/
 
 # Virtual environments
 .venv
+
+# settings
+.vscode
+
+# public folder to be generated.
+/public
