@@ -1,7 +1,7 @@
-from src.helper.block_helper import block_to_block_type, BlockType, markdown_to_blocks
-from src.helper.htmlnode import LeafNode, ParentNode
-from src.helper.inline_helper import text_to_textnodes, text_node_to_html_node
-#from src.textnode import TextNode, TextType
+from helper.block_helper import block_to_block_type, BlockType, markdown_to_blocks
+from helper.htmlnode import LeafNode, ParentNode
+from helper.inline_helper import text_to_textnodes, text_node_to_html_node
+#from textnode import TextNode, TextType
 
 
 def markdown_to_html_node(markdown):
@@ -65,28 +65,31 @@ def get_block_children(block,block_type):
         match block_type:
             case BlockType.PARA:
                 i_children = text_to_textnodes(i)
-                i_node = ParentNode(tag=None,val=None) if len(i_children)>1 else LeafNode(tag=None,val=i)
+                i_node = ParentNode(tag=None,val=None) #if len(i_children)>1 else LeafNode(tag=None,val=i)
             case BlockType.HEADING:
                 i=i.split(' ',1)[1]
                 i_children = text_to_textnodes(i)
-                i_node = ParentNode(tag=None,val=None) if len(i_children)>1 else LeafNode(tag=None,val=i)
+                i_node = ParentNode(tag=None,val=None) #if len(i_children)>1 else LeafNode(tag=None,val=i)
             case BlockType.UO_LIST:
                 i=i.split(' ',1)[1]
                 i_children = text_to_textnodes(i)
-                i_node = ParentNode(tag='li',val=None) if len(i_children)>1 else LeafNode(tag='li',val=i)
+                i_node = ParentNode(tag='li',val=None) #if len(i_children)>1 else LeafNode(tag='li',val=i)
             case BlockType.O_LIST:
                 i=i.split(' ',1)[1]
                 i_children = text_to_textnodes(i)
-                i_node = ParentNode(tag='li',val=None) if len(i_children)>1 else LeafNode(tag='li',val=i)
+                i_node = ParentNode(tag='li',val=None) #if len(i_children)>1 else LeafNode(tag='li',val=i)
             case BlockType.QUOTE:
-                i=i.split(' ',1)[1]
-                i_children = text_to_textnodes(i)
-                i_node = ParentNode(tag=None,val=None) if len(i_children)>1 else LeafNode(tag=None,val=i)
+                if i=='>':
+                    pass
+                else:    
+                    i=i.split(' ',1)[1]
+                    i_children = text_to_textnodes(i)
+                    i_node = ParentNode(tag=None,val=None) #if len(i_children)>1 else LeafNode(tag=None,val=i)
                 
         if i_node:
-            if len(i_children)>1:
-                i_children = list(map(lambda x: text_node_to_html_node(x), i_children))
-                i_node.children = i_children
-        children.append(i_node)
+            # if len(i_children)>1:
+            i_children = list(map(lambda x: text_node_to_html_node(x), i_children))
+            i_node.children = i_children
+            children.append(i_node)
     return children
             

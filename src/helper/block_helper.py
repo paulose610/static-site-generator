@@ -38,7 +38,7 @@ def block_to_block_type(block):
         return BlockType.CODE
     
     for i in block_line:
-        if i.startswith('> '):
+        if i.startswith('> ') or i=='>':
             quote_count+=1
         elif i.startswith('- '):
             uo_list_count+=1

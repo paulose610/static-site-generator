@@ -1,8 +1,8 @@
 import re
 import pprint
 
-from src.helper.textnode import TextNode, TextType
-from src.helper.htmlnode import LeafNode
+from helper.textnode import TextNode, TextType
+from helper.htmlnode import LeafNode
 
 
 def text_node_to_html_node(node):
