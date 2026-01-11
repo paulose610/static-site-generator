@@ -59,6 +59,8 @@ def process_blocks(blocks):
 
 def get_block_children(block,block_type):
     children = []
+    if block_type == BlockType.QUOTE:
+        quote_child_parent=ParentNode(tag='p')
     for i in block.split('\n'):
         i_node = None
         i_children = []
@@ -80,16 +82,23 @@ def get_block_children(block,block_type):
                 i_node = ParentNode(tag='li',val=None) #if len(i_children)>1 else LeafNode(tag='li',val=i)
             case BlockType.QUOTE:
                 if i=='>':
-                    pass
+                    if len(quote_child_parent.children)>0:
+                        children.append(quote_child_parent)
+                        quote_child_parent=ParentNode(tag='p')
                 else:    
                     i=i.split(' ',1)[1]
                     i_children = text_to_textnodes(i)
-                    i_node = ParentNode(tag=None,val=None) #if len(i_children)>1 else LeafNode(tag=None,val=i)
+                    i_children = list(map(lambda x: text_node_to_html_node(x), i_children))
+                    quote_child_parent.children.extend(i_children) #if len(i_children)>1 else LeafNode(tag=None,val=i)
                 
         if i_node:
             # if len(i_children)>1:
             i_children = list(map(lambda x: text_node_to_html_node(x), i_children))
             i_node.children = i_children
             children.append(i_node)
+
+    if block_type==BlockType.QUOTE and len(quote_child_parent.children)>0:
+        children.append(quote_child_parent)
+
     return children
             
