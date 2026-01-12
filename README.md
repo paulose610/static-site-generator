@@ -35,16 +35,24 @@ The design emphasizes clean decomposition, testability, and clear data flow from
 
 ## High-Level Architecture
 
-- Markdown Files
-- Block Splitting: Separated by double newlines
+- Markdown Files  
+  ↓
+- Block Splitting (separated by double newlines)  
+  ↓
 - Block Classification  
-  (Paragraph, Code Block, Quote, Unordered List, Ordered List, Heading)
-- Block → HTML Parent Nodes
-- Line Splitting: Separated by single newlines
+  (Paragraph, Code Block, Quote, Unordered List, Ordered List, Heading)  
+  ↓
+- Block → HTML Parent Nodes  
+  ↓
+- Line Splitting (separated by single newlines)  
+  ↓
 - Inline Parsing  
-  (bold, italic, code, links, images)
-- TextNodes
-- HTML Leaf Nodes
+  (bold, italic, code, links, images)  
+  ↓
+- TextNodes  
+  ↓
+- HTML Leaf Nodes  
+  ↓
 - Final HTML Output
 
 ---
@@ -89,7 +97,7 @@ All files inside `content/` are:
 
 - **TextNode**: Used for clean problem decomposition; represents the smallest meaningful unit of text
 - **HTML Leaf Nodes**: Contain content but no children
-- Each leaf node is attached to its respective parent node
+- Each Text node is converted to a leaf node and is attached to its respective 'line' parent node
 
 ---
 
@@ -99,18 +107,9 @@ All files inside `content/` are:
 
 Contains the primary logic for:
 
-- HTML Node classes: Parent and Leaf node definitions
+- HTML Node classes: Parent and Leaf node definitions.
+- Text Node Classes: for separation of concerns.
 - Parsing functions: Modular block and inline parsing logic
-
----
-
-### `TextNode`
-
-A dedicated class used to:
-
-- Simplify inline parsing
-- Separate concerns between parsing and rendering
-- Enable clean recursion and testing
 
 ---
 
@@ -146,7 +145,7 @@ Located in `src/tests/`, these validate:
 
 ---
 
-## How to Run the Project
+## How to Run the Project Locally
 
 ### 1. Clone the Repository
 
@@ -168,4 +167,5 @@ Execute the script from the root directory:
 ```bash
 chmod +x main.sh
 ./main.sh
+
 ```
